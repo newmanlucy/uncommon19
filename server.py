@@ -22,18 +22,18 @@ weather_secret = "26a6ea3b1dbe501627ed1371db89558a"
 def send_new_bet(bet_id, temp, amount, creator_id):
     print("Sending new bet")
     user_id = get_user_id(creator_id)
-    sol_create_bet(bet_id, user_id, temp, amount)
+    sol_bets.sol_create_bet(bet_id, user_id, temp, amount)
 
 def send_take_bet(bet_id, taker_id):
     print("Sending take bet")
     user_id = get_user_id(taker_id)
-    sol_take_bet(bet_id, user_id)
+    sol_bets.sol_take_bet(bet_id, user_id)
 
 def send_end_bet(bet_id, second_arg):
     print(bet_id)
     current_time = int(mktime(datetime.now().timetuple()))
     temp = get_weather(current_time)
-    sol_reward_winner(bet_id, temp)
+    sol_bets.sol_reward_winner(bet_id, temp)
     print("Pokng smart contract")
 
 ######################## WEATHER DATA FUNCTIONS ###########################
@@ -55,7 +55,7 @@ def dict_factory(cursor, row):
     return d
 
 def get_user_id(username):
-    conn = get_db()
+    conn = sqlite3.connect("hot_or_not.db")
     c = conn.cursor()
     q = "SELECT * FROM users WHERE username='%s'" % username
     c.execute(q)
