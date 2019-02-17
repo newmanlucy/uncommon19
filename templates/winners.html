@@ -1,0 +1,26 @@
+{% extends "head.html" %}
+{% block content %}
+<form>
+	<h2> Get Winners For </h2>
+ 	<input type="date" title="expiration" name="date" value={{date}}>
+ 	<input type="submit" class="btn" id="add-bet-button" value="Go">
+</form>
+{% if message %}
+	<h2> {{message}} </h2>
+{% else %}
+	{% if date %}
+		<h1> It was {{temp}}° F </h1>
+		{% if results is defined and results[0] is defined %}
+			<h2> Winners </h2>
+			<ul>
+			{% for res in results %}
+			  <li> <b>{{res.winner}}</b> wins <b>${{res.amount}}</b> from {{res.loser}} (it was {{res.word}} {{res.atleast}}°).
+			  </li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<h2> There were no bets for this day</h2>
+		{% endif%}
+	{% endif %}
+{% endif %}
+{% endblock %}

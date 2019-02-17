@@ -1,0 +1,17 @@
+{% extends "head.html" %}
+{% block content %}
+<h1 > Think It'll Be Hot.... Or Not?</h1>
+<h2> 
+  Bet on the weather with <b> HOT OR NOT </b>!
+</h2>
+<form>
+  <div class="log-form">
+    <h2>Log In To Play</h2>
+    <form method="POST">
+      <input type="text" name="username" placeholder="username" />
+      <input type="password" name="password" placeholder="password" />
+      <button type="submit" class="btn" formmethod="POST">Log In</button>
+    </form>
+  </div><!--end log form -->
+</form>
+{% endblock %}

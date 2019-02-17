@@ -1,0 +1,15 @@
+{% extends "head.html" %}
+{% block content %}
+<h1 > Take The Bet</h1>
+
+<form>
+  <div class="log-form">
+    <h2>{{open_bet.creator_id}} bets ${{open_bet.amount}}</h2>
+    <form method="POST">
+    	That it will be at least {{open_bet.temp}} degrees on
+     	{{open_bet.date}}.
+     	<button type="submit" class="btn" formmethod="POST" id="add-bet-button">Take It!</button>
+    </form>
+  </div><!--end log form -->
+</form>
+{% endblock %}

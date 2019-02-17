@@ -1,0 +1,10 @@
+{% extends "head.html" %}
+{% block content %}
+<h1> Open Bets</h1>
+<ul>
+{% for bet in open_bets %}
+  <li> <b>{{bet.creator_id}}</b> bets ${{bet.amount}} that it will be at least {{bet.atleast}} degrees on {{bet.date}}. <a href="/openbet/{{bet.id}}"> Take it! </a>
+  </li>
+{% endfor %}
+</ul>
+{% endblock %}

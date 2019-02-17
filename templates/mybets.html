@@ -1,0 +1,15 @@
+{% extends "head.html" %}
+{% block content %}
+<h1> At least </h1>
+<ul>
+{% for bet in my_created %}
+  <li> ${{bet.amount}}: at least {{bet.atleast}} degrees on {{bet.date}}. </li>
+{% endfor %}
+</ul>
+<h1> At most </h1>
+<ul>
+{% for bet in my_taken %}
+  <li> ${{bet.amount}}: at most {{bet.atleast}} degrees on {{bet.date}}. </li>
+{% endfor %}
+</ul>
+{% endblock %}

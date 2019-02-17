@@ -1,0 +1,19 @@
+{% extends "head.html" %}
+{% block content %}
+<h1 > Add A Bet</h1>
+
+<form>
+  <div class="log-form">
+    <h2>New Bet</h2>
+    <form method="POST">
+    	It will be at least
+    	<input type="number" value=70 id="atleastInput" name="atleast"> 
+    	degrees on
+     	<input type="date" title="expiration" id="dateInput" name="date">
+        for
+        <input type="number" name="amount" placeholder="$20">
+     	<input type="submit" class="btn" id="add-bet-button" value="Add bet!" formmethod="POST">
+    </form>
+  </div><!--end log form -->
+</form>
+{% endblock %}
