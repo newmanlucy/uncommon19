@@ -20,21 +20,17 @@ weather_secret = "26a6ea3b1dbe501627ed1371db89558a"
 ######################### SENDING TO CONTRACT #################################
 
 def send_new_bet(bet_id, temp, amount, creator_id):
-    print("Sending new bet")
     user_id = get_user_id(creator_id)
     sol_bets.sol_create_bet(bet_id, user_id, temp, amount)
 
 def send_take_bet(bet_id, taker_id):
-    print("Sending take bet")
     user_id = get_user_id(taker_id)
-    sol_bets.sol_take_bet(bet_id, user_id)
+    sol_bets.sol_take_bet(int(bet_id), user_id)
 
 def send_end_bet(bet_id, second_arg):
-    print(bet_id)
     current_time = int(mktime(datetime.now().timetuple()))
     temp = get_weather(current_time)
     sol_bets.sol_reward_winner(bet_id, temp)
-    print("Pokng smart contract")
 
 ######################## WEATHER DATA FUNCTIONS ###########################
 
@@ -134,13 +130,11 @@ def take_bet(user_id, bet_id):
     conn.close()
 
 def get_winners_and_losers(date, temp):
-    print(date)
     conn = get_db()
     c = conn.cursor()
     q = "SELECT * FROM bets"# WHERE date=%s AND taker_id IS NOT NULL" % date
     c.execute(q)
     res = c.fetchall()
-    print(res)
     conn.commit()
     conn.close()
     results = []
@@ -184,7 +178,6 @@ def newbet():
         if int(amount) < 0:
             return render_template("failure.html", message="Bet must have a positive amount!")
         bet_id = add_bet(session['username'], atleast, date, amount)
-        print(bet_id)
         send_new_bet(bet_id, atleast, amount, session['username'])
         return render_template("added.html", message="Your bet has been added.")
 
@@ -210,9 +203,7 @@ def openbet(bet_id):
         def set_send_event(bet):
             dt = datetime.strptime(bet['date'], '%Y-%m-%d')
             time_diff = int((dt - datetime.now()).total_seconds())
-            print(bet_id)
             Timer(1, send_end_bet, (bet_id, 3)).start()
-            print(time_diff)
         send_take_bet(bet_id, session["username"])
         set_send_event(bet)
         return render_template("added.html", message="You have taken the bet!")

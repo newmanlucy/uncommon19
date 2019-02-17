@@ -43,24 +43,20 @@ def sol_reward_winner(bet_id, temp):
     bets = w3.eth.contract(address=contract_address, abi=abi)
     winner = bets.functions.rewardWinner(bet_id, temp).transact()
 
-def sol_create_bet(bet_id, creator_id, atleast, stake, sender=contract_address):
+def sol_create_bet(bet_id, creator_id, atleast, stake):
     abi, contract_address = read_contract('data.json')
     bets = w3.eth.contract(address=contract_address, abi=abi)
     tx_hash = bets.functions.createBet(
-        bet_id, creator_id,atleast,stake,sender).transact()
+        bet_id, creator_id,atleast,stake).transact()
     return tx_hash
 
-def sol_take_bet(bet_id, taker):
+def sol_take_bet(bet_id, taker_id):
     abi, contract_address = read_contract('data.json')
     bets = w3.eth.contract(address=contract_address, abi=abi)
-    tx_hash = bets.functions.takeBet(bet_id, taker).transact()
+    tx_hash = bets.functions.takeBet(bet_id, taker_id).transact()
     return tx_hash
 
 if __name__ == '__main__':
     # compile all contract files
     # # figure out how to get address of person
-
-    tx_hash = sol_create_bet(2,2,10,25,contract_address)
-
-
-    print(tx_hash)
+    write_contract("data.json")

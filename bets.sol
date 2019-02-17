@@ -14,16 +14,17 @@ contract Betting {
  
     Bet[] bets;
 
-    function createBet(uint bet_id, uint creator_id, uint atleast, uint stake, address sender) {
-        Bet memory bet = Bet(bet_id, creator_id, 0, atleast, stake, sender, address(0));
+    function createBet(uint bet_id, uint creator_id, uint atleast, uint stake) {
+        Bet memory bet = Bet(bet_id, creator_id, 0, atleast, stake, address(creator_id), address(0));
         bets.push(bet);
     }
 
-    function takeBet(uint bet_id, address taker) {
+    function takeBet(uint bet_id, uint taker_id) {
         for (uint i=0; i<bets.length; i++) {
             if (bets[i].bet_id == bet_id) {
                 Bet storage bet = bets[i];
-                bet.taker = taker;            
+                bet.taker_id = taker_id;
+                bet.taker = address(taker_id);            
             }
         }
     }
