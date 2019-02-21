@@ -6,7 +6,7 @@ This web app allows users to attempt to make and bet on predictions for the weat
 To Intsall
 ----------
 
-Install `solc` on your computer and run `make install` to install the addtional requirements. 
+[Install `solc`](https://solidity.readthedocs.io/en/v0.4.24/installing-solidity.html) on your computer and run `make install` to install the addtional requirements.
 
 To Run
 ------
