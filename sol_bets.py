@@ -38,7 +38,7 @@ def read_contract(filename):
 
 def sol_reward_winner(bet_id, temp, abi, contract_address):
     bets = w3.eth.contract(address=contract_address, abi=abi)
-    winner = bets.functions.rewardWinner(bet_id, temp).transact()
+    winner = bets.functions.rewardWinner(bet_id, int(temp)).transact()
 
 def sol_create_bet(bet_id, creator_id, atleast, stake, abi, contract_address):
     bets = w3.eth.contract(address=contract_address, abi=abi)

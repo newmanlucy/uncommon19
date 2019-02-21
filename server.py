@@ -205,7 +205,7 @@ def openbet(bet_id):
         def set_send_event(bet):
             dt = datetime.strptime(bet['date'], '%Y-%m-%d')
             time_diff = int((dt - datetime.now()).total_seconds())
-            Timer(1, send_end_bet, (bet_id, 3)).start()
+            Timer(time_diff, send_end_bet, (int(bet_id), int(3))).start()
         send_take_bet(bet_id, session["username"])
         set_send_event(bet)
         return render_template("added.html", message="You have taken the bet!")
