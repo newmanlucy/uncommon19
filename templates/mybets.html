@@ -2,14 +2,22 @@
 {% block content %}
 <h1> At least </h1>
 <ul>
-{% for bet in my_created %}
-  <li> ${{bet.amount}}: at least {{bet.atleast}} degrees on {{bet.date}}. </li>
-{% endfor %}
+{% if my_created is defined and my_created[0] is defined %}
+	{% for bet in my_created %}
+	  <li> ${{bet.amount}}: at least {{bet.atleast}} degrees on {{bet.date}}. </li>
+	{% endfor %}
+{% else %}
+	<h2> You haven't created any bets yet </h2>
+{% endif %}
 </ul>
 <h1> At most </h1>
 <ul>
-{% for bet in my_taken %}
-  <li> ${{bet.amount}}: at most {{bet.atleast}} degrees on {{bet.date}}. </li>
-{% endfor %}
+{% if my_taken is defined and my_taken[0] is defined %}
+	{% for bet in my_taken %}
+	  <li> ${{bet.amount}}: at most {{bet.atleast}} degrees on {{bet.date}}. </li>
+	{% endfor %}
+{% else %}
+	<h2> You haven't taken any bets yet </h2>
+{% endif %}
 </ul>
 {% endblock %}
