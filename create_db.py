@@ -1,7 +1,7 @@
 import sqlite3
 
 def create_db():
-	conn = sqlite3.connect("hot_or_not.db")
+	conn = sqlite3.connect("weather_betting.db")
 	c = conn.cursor()
 	c.execute("""
 		CREATE TABLE users (username TEXT PRIMARY KEY)

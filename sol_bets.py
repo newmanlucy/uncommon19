@@ -36,22 +36,17 @@ def read_contract(filename):
         contract_address = datastore['contract_address']
         return abi, contract_address
 
-abi, contract_address = read_contract('data.json')
-
-def sol_reward_winner(bet_id, temp):
-    abi, contract_address = read_contract('data.json')
+def sol_reward_winner(bet_id, temp, abi, contract_address):
     bets = w3.eth.contract(address=contract_address, abi=abi)
     winner = bets.functions.rewardWinner(bet_id, temp).transact()
 
-def sol_create_bet(bet_id, creator_id, atleast, stake):
-    abi, contract_address = read_contract('data.json')
+def sol_create_bet(bet_id, creator_id, atleast, stake, abi, contract_address):
     bets = w3.eth.contract(address=contract_address, abi=abi)
     tx_hash = bets.functions.createBet(
         bet_id, creator_id,atleast,stake).transact()
     return tx_hash
 
-def sol_take_bet(bet_id, taker_id):
-    abi, contract_address = read_contract('data.json')
+def sol_take_bet(bet_id, taker_id, abi, contract_address):
     bets = w3.eth.contract(address=contract_address, abi=abi)
     tx_hash = bets.functions.takeBet(bet_id, taker_id).transact()
     return tx_hash
