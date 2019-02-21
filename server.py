@@ -175,8 +175,8 @@ def newbet():
         atleast = int(request.form.get("atleast"))
         amount = int(request.form.get("amount"))
         dt_obj = datetime.strptime(date, '%Y-%m-%d')
-        # if dt_obj < datetime.now():
-        #     return render_template("failure.html", message="Bet must be in the future!")
+        if dt_obj < datetime.now():
+            return render_template("failure.html", message="Bet must be in the future!")
         if int(amount) < 0:
             return render_template("failure.html", message="Bet must have a positive amount!")
         bet_id = add_bet(session['username'], atleast, date, amount)
